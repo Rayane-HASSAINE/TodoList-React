@@ -1,4 +1,4 @@
-import styles from "./TaskItem.module.css";
+import styles from "./taskItem.module.css";
 
 const TaskItem = () => {
     return (
@@ -13,8 +13,8 @@ const TaskItem = () => {
                 </div>
             </div>
 
-            <button>
-
+            <button className="button-primary">
+            x
             </button>
         </li>
     )
