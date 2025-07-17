@@ -8,11 +8,10 @@ const TaskContainer = () => {
 
   const [tasksList, setTasksList] = useState([]);
 
-console.log(tasksList)
 
   const addTask = (title) => {
     const newTask = {
-      id: tasksList.length + 1,
+      id: tasksList.length ? tasksList[tasksList.length -1].id+1:1,
       title: title,
       completed: false,
     };
@@ -39,9 +38,9 @@ console.log(tasksList)
 
     return {
       completedTasks,
-      incompletedTasks
-    }
-  }
+      incompletedTasks,
+    };
+  };
 
   // permet d'utiliser separement completedTasks et incompletedTasks hors de la fonction getTaskCounts
   const { completedTasks, incompletedTasks } = getTaskCounts();
@@ -56,7 +55,7 @@ console.log(tasksList)
         editTask={editTask}
         deleteTask={deleteTask}
         incompletedTasks={incompletedTasks} />
-      <Footer />
+      <Footer completedTasks={completedTasks}/>
     </main>
   )
 }
