@@ -6,36 +6,56 @@ import Footer from './footer/footer.jsx'
 
 const TaskContainer = () => {
 
-  const [tasksList, setTasksList] = useState([
-    // {
-    //   id: 1,
-    //   title: "Faire la vaisselle",
-    //   completed: false,
-    // },
+  const [tasksList, setTasksList] = useState([]);
 
-    // {
-    //   id: 2,
-    //   title: "Sortir le chien",
-    //   completed: true,
-    // }
-  ]);
+console.log(tasksList)
 
-    const addTask = (title) => {
-      const newTask = {
-        id: 5,
-        title: title,
-        completed: false,
-      }
-      setTasksList([...tasksList, newTask])
+  const addTask = (title) => {
+    const newTask = {
+      id: tasksList.length + 1,
+      title: title,
+      completed: false,
+    };
+    setTasksList([...tasksList, newTask])
+  };
+
+  //editer
+  const editTask = (id, completedValue) => {
+    setTasksList(tasksList.map((task) =>
+      task.id === id ? { ...task, completed: completedValue } : task
+    )
+    );
+  };
+
+  //supprimer
+  const deleteTask = (id) => {
+    setTasksList(tasksList.filter((task) => task.id !== id));
+  }
+
+  //Avec TaskFlow tu as éliminé X taches
+  const getTaskCounts = () => {
+    const completedTasks = tasksList.filter((task) => task.completed === true).length;
+    const incompletedTasks = tasksList.length - completedTasks;
+
+    return {
+      completedTasks,
+      incompletedTasks
     }
+  }
 
-  console.log(tasksList);
+  // permet d'utiliser separement completedTasks et incompletedTasks hors de la fonction getTaskCounts
+  const { completedTasks, incompletedTasks } = getTaskCounts();
+
+  console.log(completedTasks, incompletedTasks);
 
   return (
     <main>
       <Header />
       <TaskInput addTask={addTask} />
-      <TaskList />
+      <TaskList tasksList={tasksList}
+        editTask={editTask}
+        deleteTask={deleteTask}
+        incompletedTasks={incompletedTasks} />
       <Footer />
     </main>
   )

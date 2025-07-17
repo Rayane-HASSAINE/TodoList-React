@@ -1,14 +1,21 @@
 import TaskItem from "../taskItem/taskItem"
 import styles from "./TaskList.module.css"
 
-const TaskList = () => {
+const TaskList = ({
+  tasksList, 
+  editTask, 
+  deleteTask, 
+  incompletedTasks }) => {
   return (
     <div className="box">
         <h2 className={styles.title}>
-            Il te reste encore x taches à accomplir !
+            Il te reste encore {incompletedTasks} taches à accomplir !
         </h2>
 
         <ul className={styles.container}>
+            <TaskItem />
+            <TaskItem />
+            <TaskItem />
             <TaskItem />
 
 
